@@ -1,0 +1,70 @@
+/* CSS declarations go here */
+@font-face {
+  font-family: "Fjord";
+  src: url("fjord.otf");
+}
+
+body {
+  font-family: "Fjord";
+  background: #f2f0e4;
+  color: grey;
+  text-align: center;
+}
+#info {
+  background: white;
+  border-style: solid;
+  border-width: 2px;
+  border-color: lightgrey;
+  height: 100%;
+  padding: .5em
+}
+.infogroup {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+h2 {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+h3 {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+a {
+  color: rgb(89, 182, 187);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* SVG */
+text {
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.headings text{
+  text-anchor: middle;
+  dominant-baseline: hanging;
+  fill: darkgray;
+}
+
+.node text {
+  text-anchor: middle;
+  dominant-baseline:middle;
+}
+
+
+circle {
+  stroke: #f2f0e4;
+  stroke-width: 3px;
+}
+
+circle.languages {
+  /* fill: brown; */
+}
+circle.tools {
+  /* fill: steelblue */
+}
+circle.skills {
+  /* fill: olivedrab */
+}
+
