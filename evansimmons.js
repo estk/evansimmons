@@ -6,18 +6,24 @@ Router.map(function () {
   this.route('home', {
     path: '/',
     template: 'home',
-    before: renderHome,
-    // waitOn: function () {
-    //   return Meteor.subscribe('knowledge');
-    // }
+    after: renderHome,
+    waitOn: function() {
+      return Meteor.subscribe("knowledge")
+    },
+    unLoad: function() {
+      d3.select("svg.home").remove()
+    }
   });
   this.route('work', {
     path: '/work',
     template: "work",
-    before: renderWork,
-    // waitOn: function () {
-    //   return Meteor.subscribe('work');
-    // }
+    after: renderWork,
+    waitOn: function() {
+      return Meteor.subscribe("work");
+    },
+    unLoad: function() {
+      d3.select("svg.home").remove()
+    }
   });
 });
 
@@ -35,7 +41,10 @@ function renderHome() {
       height = 800 - margin.top - margin.bottom,
       origin = {x: width/2, y: 2*height/3};
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select("body").selectAll("svg.home")
+    .data([1]).enter()
+    .append("svg")
+      .attr("class", "home")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .attr("xmlns", "http://www.w3.org/2000/svg")
@@ -71,11 +80,17 @@ function renderHome() {
   var node = svg.selectAll("g.node");
   var addInterval;
 
-  makeKnowledge();
-
-  function makeKnowledge () {
-    var klist = Knowledge.find({}).fetch()
+  d3.json("knowledge.json", function (error, json) {
+    var klist = [];
+    // Make list of "pre"-nodes
+    for (var c in json) {
+      json[c].forEach(function(o) {
+        o.category = c;
+        klist.push(o);
+      });
+    }
     klist = shuffle(klist);
+
     addInterval = setInterval(function () {
         if (klist.length === 0) {
           clearInterval(addInterval);
@@ -91,7 +106,7 @@ function renderHome() {
         enterUpdater();
 
     }, 200);
-  }
+  });
 
   function enterUpdater() {
     node = node.data(nodes, function(d) { return d.name; });
@@ -111,11 +126,15 @@ function renderHome() {
         .ease("cubic")
         .attr("r", function(d,i){return d.knowledge*5;});
 
-
     g.append("text")
         .attr("fill", "dimgrey")
-        .attr("font-size", "13px")
+        .attr("font-size", "1e-6px")
         .text(function(d){ return d.name; });
+
+    g.select("text").transition()
+        .duration(200)
+        .ease("cubic")
+        .attr("font-size", "13px");
 
     // Helpers
     function radius(d) {
@@ -252,7 +271,7 @@ function renderHome() {
 
           clearTimeout(addInterval);
           setTimeout(function() {
-            d3.select("svg").remove();
+            d3.select("svg.home").remove();
             Router.go("work");
           }, time);
         });
@@ -268,7 +287,10 @@ function renderWork() {
       height = 800 - margin.top - margin.bottom,
       origin = {x: width/2, y: 2*height/3};
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select("body").selectAll("svg.work")
+    .data([1]).enter()
+    .append("svg")
+      .attr("class", "work")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .attr("xmlns", "http://www.w3.org/2000/svg")
@@ -294,7 +316,6 @@ function renderWork() {
   var addInterval, 
       nodes = [];
 
-  var work = Work.find({}).fetch();
 
   var force = d3.layout.force()
     .nodes(nodes)
@@ -304,22 +325,27 @@ function renderWork() {
     .on("tick", tick);
 
   var node = svg.selectAll("g.node");
-  var addInterval = setInterval(function () {
-      if (work.length === 0) {
-        clearInterval(addInterval);
-        return;
-      }
-      var curNode = work.pop()
-      curNode.x = width/2;
-      curNode.y = height;
-      curNode.cy = y(parseDate(curNode.date));
-      curNode.cx = x(parseDate(curNode.date));
-      curNode.r = Math.sqrt(curNode.pages)*20
 
-      nodes.push(curNode);
-      force.start();
-      enterUpdater();
-  }, 200);
+  d3.json("work.json", function (error, json) {
+    var work = json.work;
+
+    var addInterval = setInterval(function () {
+        if (work.length === 0) {
+          clearInterval(addInterval);
+          return;
+        }
+        var curNode = work.pop()
+        curNode.x = width/2;
+        curNode.y = height;
+        curNode.cy = y(parseDate(curNode.date));
+        curNode.cx = x(parseDate(curNode.date));
+        curNode.r = Math.sqrt(curNode.pages)*20
+
+        nodes.push(curNode);
+        force.start();
+        enterUpdater();
+    }, 200);
+  });
 
   function enterUpdater() {
     node = node.data(nodes, function(d){ return d.name; });
@@ -400,7 +426,7 @@ function renderWork() {
 
           clearTimeout(addInterval);
           setTimeout(function() {
-            d3.select("svg").remove()
+            d3.select("svg.work").remove()
             Router.go("/")
           }, time);
         });

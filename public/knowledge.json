@@ -1,0 +1,29 @@
+{
+  "languages": [
+    {"name": "JavaScript", "knowledge": 9, "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"},
+    {"name": "Haskell", "knowledge": 9, "link": "http://www.haskell.org/haskellwiki/Haskell"},
+    {"name": "Python", "knowledge": 7, "link": "http://www.python.org/"},
+    {"name": "Ruby", "knowledge": 7, "link": "https://www.ruby-lang.org/en/"},
+    {"name": "C", "knowledge": 6, "link": "http://en.wikipedia.org/wiki/The_Art_of_Computer_Programming"},
+    {"name": "Java", "knowledge": 6, "link": "https://www.java.com/en/"},
+    {"name": "Scheme", "knowledge": 6, "link": "http://mitpress.mit.edu/sicp/"}
+  ],
+
+  "tools": [
+    {"name": "Meteor", "knowledge": 10, "link": "https://www.meteor.com/"},
+    {"name": "D3", "knowledge": 10, "link": "http://d3js.org/"},
+    {"name": "JQuery", "knowledge": 6, "link": "http://jquery.com/"},
+    {"name": "Rails", "knowledge": 6, "link": "http://rubyonrails.org/"},
+    {"name": "HTML", "knowledge": 9, "link": "http://www.w3.org/html/"},
+    {"name": "CSS", "knowledge": 9, "link": "http://www.w3.org/Style/CSS/Overview.en.html"},
+    {"name": "Latex", "knowledge": 9, "link": "http://www.latex-project.org/"}
+  ],
+  "skills": [
+    {"name": "ML", "knowledge": 8, "link": "http://research.microsoft.com/en-us/um/people/cmbishop/prml/"},
+    {"name": "AI", "knowledge": 6, "link": "http://aima.cs.berkeley.edu/"},
+    {"name": "OOP", "knowledge": 7, "link": "http://en.wikipedia.org/wiki/Object-oriented_programming"},
+    {"name": "FP", "knowledge": 10, "link": "http://en.wikipedia.org/wiki/Functional_programming"},
+    {"name": "Data Vis", "knowledge": 10, "link": "http://www.thefunctionalart.com/"},
+    {"name": "Color", "knowledge": 7, "link": "http://www.research.ibm.com/people/l/lloydt/color/color.HTM"}
+  ]
+}

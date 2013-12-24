@@ -1,0 +1,9 @@
+{
+  "work": [
+    {"name": "Software Transactional Memory", "link": "stm.pdf", "pages": 10, "date": "2013-3-1"},
+    {"name": "Satisfiability Benchmarking", "link": "sat.pdf", "pages": 1, "date": "2013-6-1"},
+    {"name": "Machine Learning Algorithm Analysis", "link": "ml.pdf", "pages": 7, "date": "2013-12-1"},
+    {"name": "Eligible Bachelors", "link": "eb/index.html", "pages": 3, "date": "2013-12-1"},
+    {"name": "Ford-Fulkerson", "link": "ford-fulkerson.html", "pages": 2, "date": "2013-12-30"}
+  ]
+}

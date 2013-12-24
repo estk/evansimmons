@@ -1,1 +1,4 @@
 *.swp
+public/eb
+public/*.html
+public/*.pdf

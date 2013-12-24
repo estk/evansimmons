@@ -11,9 +11,7 @@ Meteor.startup(function(){
 
   // Make list of "pre"-nodes
   for (var c in kJson) {
-    console.log(c)
     kJson[c].forEach(function(o) {
-      console.log(o.name)
       o.category = c;
       Knowledge.insert(o);
     });
