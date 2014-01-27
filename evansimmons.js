@@ -8,10 +8,10 @@ Router.map(function () {
     template: 'home',
     after: renderHome,
     waitOn: function() {
-      return Meteor.subscribe("knowledge")
+      return Meteor.subscribe("knowledge");
     },
-    unLoad: function() {
-      d3.select("svg.home").remove()
+    unload: function() {
+      d3.select("svg.home").remove();
     }
   });
   this.route('work', {
@@ -21,8 +21,8 @@ Router.map(function () {
     waitOn: function() {
       return Meteor.subscribe("work");
     },
-    unLoad: function() {
-      d3.select("svg.home").remove()
+    unload: function() {
+      unloadWork();
     }
   });
 });
@@ -419,20 +419,13 @@ function renderWork() {
         .text("BACK")
 
       svg.select("#back")
-        .on("mousedown", function() { 
-          var ltime = removeLabels(),
-              ntime = removeNodes(); 
-          var time = Math.max(ltime,ntime);
+        .on("mousedown", unloadWork);
 
-          clearTimeout(addInterval);
-          setTimeout(function() {
-            d3.select("svg.work").remove()
-            Router.go("/")
-          }, time);
-        });
+
+      window.unloadWork = unloadWork;
   }
 
-  function removeLabels() {
+function removeLabels() {
     var wait = 50;
     var duration = 100;
     var headings = svg.select(".headings");
@@ -446,6 +439,18 @@ function renderWork() {
         .remove();
 
   return wait*nodes.length + duration;
+}
+
+function unloadWork() {
+  var ltime = removeLabels(),
+      ntime = removeNodes(); 
+  var time = Math.max(ltime,ntime);
+
+  clearTimeout(addInterval);
+  setTimeout(function() {
+    d3.select("svg.work").remove()
+    Router.go("/")
+  }, time);
 }
 
 function removeNodes() {
