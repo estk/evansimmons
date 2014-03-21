@@ -300,14 +300,14 @@ function renderWork() {
   var parseDate = d3.time.format("%Y-%m-%d").parse;
 
   var x = d3.time.scale()
-      .domain([parseDate("2013-1-1"), parseDate("2014-1-1")])
+      .domain([parseDate("2013-1-1"), parseDate("2014-6-1")])
       .range([200, width-200]);
   var y = d3.time.scale()
-      .domain([parseDate("2013-1-1"), parseDate("2014-1-1")])
+      .domain([parseDate("2013-1-1"), parseDate("2014-6-1")])
       .range([height-300, 300]);
 
   var cscale = d3.time.scale()
-    .domain([parseDate("2013-1-1"), parseDate("2014-1-1")])
+    .domain([parseDate("2013-1-1"), parseDate("2014-6-1")])
     .range(['rgb(207, 150, 190)', 'rgb(89, 182, 187)', 'rgb(145, 179, 98)'])
     .interpolate(d3.interpolateLab)
 
@@ -405,7 +405,7 @@ function renderWork() {
         .attr("font-size", "58px")
         .attr("y",0)
         .attr("x", width/2)
-        .text("2013");
+        .text("2013-14");
 
     headings.append("a")
       .append("text")
